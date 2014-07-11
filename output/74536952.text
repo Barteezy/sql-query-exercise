@@ -1,0 +1,34 @@
+exercisedb=# select orders.id, customers.name, orders.amount from orders inner join customers on orders.customer_id=customers.id;
+ id |         name         | amount
+----+----------------------+--------
+  1 | Zelma Davis          |  63.35
+  2 | Elta Dicki           |  55.42
+  3 | Edna Hintz           |   91.7
+  4 | Evert Pfeffer        |  49.52
+  5 | Evert Pfeffer        |   4.81
+  6 | Elta Dicki           |  65.82
+  7 | Evert Pfeffer        |  25.91
+  8 | Coleman Prohaska Jr. |  64.59
+  9 | Ms. Sofia Rowe       |  68.89
+ 10 | Edna Hintz           |  85.04
+ 11 | Donato Rempel        |  19.67
+ 12 | Zelma Davis          |  29.74
+ 13 | Elta Dicki           |  61.56
+ 14 | Zelma Davis          |  30.24
+ 15 | Donato Rempel        |   5.67
+ 16 | Wilhelmine Huels     |  31.45
+ 17 | Tyrell Von DDS       |   1.69
+ 18 | Hulda Will III       |  30.91
+ 19 | Ms. Sofia Rowe       |  97.11
+ 20 | Tyrell Von DDS       |    5.4
+ 21 | Donato Rempel        |  55.97
+ 22 | Evert Pfeffer        |  44.42
+ 23 | Hulda Will III       |  80.77
+ 24 | Edna Hintz           |  11.16
+ 25 | Hulda Will III       |  26.37
+ 26 | Donato Rempel        |  39.48
+ 27 | Wilhelmine Huels     |  13.33
+ 28 | Evert Pfeffer        |  19.72
+ 29 | Zelma Davis          |  73.06
+ 30 | Hulda Will III       |  81.17
+:

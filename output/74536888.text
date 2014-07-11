@@ -1,0 +1,1946 @@
+
+lukebartel=# \list
+                                     List of databases
+    Name    |   Owner    | Encoding |   Collate   |    Ctype    |     Access privileges
+------------+------------+----------+-------------+-------------+---------------------------
+ exercisedb | lukebartel | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ lukebartel | lukebartel | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ postgres   | lukebartel | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ template0  | lukebartel | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/lukebartel            +
+            |            |          |             |             | lukebartel=CTc/lukebartel
+ template1  | lukebartel | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/lukebartel            +
+            |            |          |             |             | lukebartel=CTc/lukebartel
+ testdb     | lukebartel | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+(6 rows)
+
+lukebartel=# \connect exercisedb
+You are now connected to database "exercisedb" as user "lukebartel".
+exercisedb=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner
+--------+------------+-------+---------
+ public | customers  | table | gschool
+ public | items      | table | gschool
+ public | orderitems | table | gschool
+ public | orders     | table | gschool
+(4 rows)
+
+exercisedb=# SELECT * FROM customers
+exercisedb-# SELECT * customers                                                                                                        SELECT * FROM customers;
+ERROR:  syntax error at or near "SELECT"
+LINE 2: SELECT * customers
+        ^
+exercisedb=# SELECT * FROM customers;
+ id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+  2 | Tyrell Von DDS       | cleo_frami@bartondenesik.name    | 63337 Abdullah Camp | Verdieborough    | Colorado   | 69882-7027
+  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Maine      | 55164-9178
+ 10 | Hulda Will III       | ella_sanford@stracke.com         | 3746 Ashton Divide  | Mikeberg         | Florida    | 22826
+(10 rows)
+
+exercisedb=# SELECT * FROM customers ORDER BY name ASC LIMIT 5;
+ id |         name         |            email             |      address       |       city       |   state    |  zipcode
+----+----------------------+------------------------------+--------------------+------------------+------------+------------
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org       | 32202 Zemlak Ridge | Rigobertoside    | Colorado   | 95667-8653
+  1 | Donato Rempel        | ladarius@waelchi.org         | 890 Ullrich Plains | Janachester      | Virginia   | 77714
+  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz | 2550 Hassan Pass   | North Kelliestad | California | 40909-5637
+  5 | Elta Dicki           | lesly@heaney.org             | 3878 Alyce Lock    | Deckowtown       | Montana    | 42114-6195
+  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org    | 1311 Khalil Shores | Port Ozella      | Arizona    | 34713
+(5 rows)
+
+exercisedb=# SELECT * FROM customers ORDER BY id ASC LIMIT 5;
+ id |      name      |             email             |       address       |      city      |  state   |  zipcode
+----+----------------+-------------------------------+---------------------+----------------+----------+------------
+  1 | Donato Rempel  | ladarius@waelchi.org          | 890 Ullrich Plains  | Janachester    | Virginia | 77714
+  2 | Tyrell Von DDS | cleo_frami@bartondenesik.name | 63337 Abdullah Camp | Verdieborough  | Colorado | 69882-7027
+  3 | Ms. Sofia Rowe | jacky_funk@bayerprosacco.name | 1991 Kyler Village  | Opheliaborough | Ohio     | 15599-5395
+  4 | Evert Pfeffer  | alisa.luettgen@hoeger.org     | 1311 Khalil Shores  | Port Ozella    | Arizona  | 34713
+  5 | Elta Dicki     | lesly@heaney.org              | 3878 Alyce Lock     | Deckowtown     | Montana  | 42114-6195
+(5 rows)
+
+exercisedb=# SELECT * FROM customers ORDER BY name ASC;
+ id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+ 10 | Hulda Will III       | ella_sanford@stracke.com         | 3746 Ashton Divide  | Mikeberg         | Florida    | 22826
+  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+  2 | Tyrell Von DDS       | cleo_frami@bartondenesik.name    | 63337 Abdullah Camp | Verdieborough    | Colorado   | 69882-7027
+  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Maine      | 55164-9178
+  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+(10 rows)
+
+exercisedb=# SELECT * FROM customers ORDER BY name DESC;
+ id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Maine      | 55164-9178
+  2 | Tyrell Von DDS       | cleo_frami@bartondenesik.name    | 63337 Abdullah Camp | Verdieborough    | Colorado   | 69882-7027
+  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 | Hulda Will III       | ella_sanford@stracke.com         | 3746 Ashton Divide  | Mikeberg         | Florida    | 22826
+  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+(10 rows)
+
+exercisedb=# SELECT *
+exercisedb-# SELECT * ALL
+exercisedb-# SELECT * exercisedb
+exercisedb-# SELECT * exercisedb;
+ERROR:  syntax error at or near "SELECT"
+LINE 2: SELECT * ALL
+        ^
+exercisedb=# SELECT *                                                                                                                  SELECT * ALL                                                                                                                           SELECT * exercisedb                                                                                                                    SELECT * exercisedb;
+ERROR:  syntax error at or near "SELECT"
+LINE 2: SELECT * ALL
+        ^
+exercisedb=# select * from exercisedb
+exercisedb-# SELECT *                                                                                                                  SELECT * ALL                                                                                                                           SELECT * exercisedb;
+ERROR:  syntax error at or near "SELECT"
+LINE 2: SELECT *
+        ^
+exercisedb=# select * from exercisedb;
+ERROR:  relation "exercisedb" does not exist
+LINE 1: select * from exercisedb;
+                      ^
+exercisedb=# select[all];
+ERROR:  syntax error at or near "["
+LINE 1: select[all];
+              ^
+exercisedb=# select * from exercisedb;
+ERROR:  relation "exercisedb" does not exist
+LINE 1: select * from exercisedb;
+                      ^
+exercisedb=# SELECT * FROM customers
+exercisedb-# SELECT * FROM customers;
+ERROR:  syntax error at or near "SELECT"
+LINE 2: SELECT * FROM customers;
+        ^
+exercisedb=# SELECT * FROM customers;
+ id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+  2 | Tyrell Von DDS       | cleo_frami@bartondenesik.name    | 63337 Abdullah Camp | Verdieborough    | Colorado   | 69882-7027
+  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Maine      | 55164-9178
+ 10 | Hulda Will III       | ella_sanford@stracke.com         | 3746 Ashton Divide  | Mikeberg         | Florida    | 22826
+(10 rows)
+
+exercisedb=# SELECT * FROM exercisedb
+exercisedb-# SELECT * FROM exercisedb;
+ERROR:  syntax error at or near "SELECT"
+LINE 2: SELECT * FROM exercisedb;
+        ^
+exercisedb=# SELECT * FROM exercisedb;
+ERROR:  relation "exercisedb" does not exist
+LINE 1: SELECT * FROM exercisedb;
+                      ^
+exercisedb=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner
+--------+------------+-------+---------
+ public | customers  | table | gschool
+ public | items      | table | gschool
+ public | orderitems | table | gschool
+ public | orders     | table | gschool
+(4 rows)
+
+exercisedb=# select * from customers;
+ id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+  2 | Tyrell Von DDS       | cleo_frami@bartondenesik.name    | 63337 Abdullah Camp | Verdieborough    | Colorado   | 69882-7027
+  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Maine      | 55164-9178
+ 10 | Hulda Will III       | ella_sanford@stracke.com         | 3746 Ashton Divide  | Mikeberg         | Florida    | 22826
+(10 rows)
+
+exercisedb=# select * from itesm;
+ERROR:  relation "itesm" does not exist
+LINE 1: select * from itesm;
+                      ^
+exercisedb=# select * from items;
+ id |  name  |    description
+----+--------+-------------------
+  1 | ski01  | downhill ski
+  2 | ski02  | cross country ski
+  3 | ski03  | snow board
+  4 | bike01 | mountain bike
+  5 | bike02 | road bike
+  6 | bike03 | tricycle
+  7 | boot01 | hiking boots
+  8 | boot02 | ski boots
+  9 | boot03 | moon boots
+(9 rows)
+
+exercisedb=# select * from items where description like "%boots";
+ERROR:  column "%boots" does not exist
+LINE 1: select * from items where description like "%boots";
+                                                   ^
+exercisedb=# select * from items where description contains 'boots';
+ERROR:  syntax error at or near "contains"
+LINE 1: select * from items where description contains 'boots';
+                                              ^
+exercisedb=# select * from items
+exercisedb-# select * from items;
+ERROR:  syntax error at or near "select"
+LINE 2: select * from items;
+        ^
+exercisedb=# select * from items;
+ id |  name  |    description
+----+--------+-------------------
+  1 | ski01  | downhill ski
+  2 | ski02  | cross country ski
+  3 | ski03  | snow board
+  4 | bike01 | mountain bike
+  5 | bike02 | road bike
+  6 | bike03 | tricycle
+  7 | boot01 | hiking boots
+  8 | boot02 | ski boots
+  9 | boot03 | moon boots
+(9 rows)
+
+exercisedb=# select * from items where description contains 'boots';
+ERROR:  syntax error at or near "contains"
+LINE 1: select * from items where description contains 'boots';
+                                              ^
+exercisedb=# select * from items;
+ id |  name  |    description
+----+--------+-------------------
+  1 | ski01  | downhill ski
+  2 | ski02  | cross country ski
+  3 | ski03  | snow board
+  4 | bike01 | mountain bike
+  5 | bike02 | road bike
+  6 | bike03 | tricycle
+  7 | boot01 | hiking boots
+  8 | boot02 | ski boots
+  9 | boot03 | moon boots
+(9 rows)
+
+exercisedb=# selecet * from items where description '%boots';
+ERROR:  syntax error at or near "selecet"
+LINE 1: selecet * from items where description '%boots';
+        ^
+exercisedb=# select * from items where description '%boots';
+ERROR:  type "description" does not exist
+LINE 1: select * from items where description '%boots';
+                                  ^
+exercisedb=# select * from items where description '%boots';
+ERROR:  type "description" does not exist
+LINE 1: select * from items where description '%boots';
+                                  ^
+exercisedb=# select * from items
+exercisedb-# select * from items;
+ERROR:  syntax error at or near "select"
+LINE 2: select * from items;
+        ^
+exercisedb=# select * from items                                                                                                       select * from items;
+ERROR:  syntax error at or near "select"
+LINE 2: select * from items;
+        ^
+exercisedb=# select * from items;
+ id |  name  |    description
+----+--------+-------------------
+  1 | ski01  | downhill ski
+  2 | ski02  | cross country ski
+  3 | ski03  | snow board
+  4 | bike01 | mountain bike
+  5 | bike02 | road bike
+  6 | bike03 | tricycle
+  7 | boot01 | hiking boots
+  8 | boot02 | ski boots
+  9 | boot03 | moon boots
+(9 rows)
+
+exercisedb=# select * from items
+exercisedb-# where description like '%boots'
+exercisedb-# ;
+ id |  name  | description
+----+--------+--------------
+  7 | boot01 | hiking boots
+  8 | boot02 | ski boots
+  9 | boot03 | moon boots
+(3 rows)
+
+exercisedb=# select * from orders
+exercisedb-# ;
+ id | customer_id | amount
+----+-------------+--------
+  1 |           6 |  63.35
+  2 |           5 |  55.42
+  3 |           7 |   91.7
+  4 |           4 |  49.52
+  5 |           4 |   4.81
+  6 |           5 |  65.82
+  7 |           4 |  25.91
+  8 |           8 |  64.59
+  9 |           3 |  68.89
+ 10 |           7 |  85.04
+ 11 |           1 |  19.67
+ 12 |           6 |  29.74
+ 13 |           5 |  61.56
+ 14 |           6 |  30.24
+ 15 |           1 |   5.67
+ 16 |           9 |  31.45
+ 17 |           2 |   1.69
+ 18 |          10 |  30.91
+ 19 |           3 |  97.11
+ 20 |           2 |    5.4
+ 21 |           1 |  55.97
+ 22 |           4 |  44.42
+ 23 |          10 |  80.77
+ 24 |           7 |  11.16
+ 25 |          10 |  26.37
+ 26 |           1 |  39.48
+ 27 |           9 |  13.33
+ 28 |           4 |  19.72
+ 29 |           6 |  73.06
+ 30 |          10 |  81.17
+ 31 |          10 |  56.66
+ 32 |           4 |  84.81
+ 33 |           6 |  36.94
+exercisedb=# SELECT * FROM orders ORDER BY name ASC LIMIT 5;
+ERROR:  column "name" does not exist
+LINE 1: SELECT * FROM orders ORDER BY name ASC LIMIT 5;
+                                      ^
+exercisedb=# SELECT * FROM orders ORDER BY id ASC LIMIT 5;
+ id | customer_id | amount
+----+-------------+--------
+  1 |           6 |  63.35
+  2 |           5 |  55.42
+  3 |           7 |   91.7
+  4 |           4 |  49.52
+  5 |           4 |   4.81
+(5 rows)
+
+exercisedb=# SELECT * FROM orders ORDER BY id DESC LIMIT 5;
+ id | customer_id | amount
+----+-------------+--------
+ 50 |           5 |   59.5
+ 49 |           3 |   50.1
+ 48 |           7 |  80.36
+ 47 |           8 |  31.07
+ 46 |          10 |   3.05
+(5 rows)
+
+exercisedb=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner
+--------+------------+-------+---------
+ public | customers  | table | gschool
+ public | items      | table | gschool
+ public | orderitems | table | gschool
+ public | orders     | table | gschool
+(4 rows)
+
+exercisedb=# select * customers
+exercisedb-# ;
+ERROR:  syntax error at or near "customers"
+LINE 1: select * customers
+                 ^
+exercisedb=# select * customers;
+ERROR:  syntax error at or near "customers"
+LINE 1: select * customers;
+                 ^
+exercisedb=# select * from customers;
+ id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+  2 | Tyrell Von DDS       | cleo_frami@bartondenesik.name    | 63337 Abdullah Camp | Verdieborough    | Colorado   | 69882-7027
+  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Maine      | 55164-9178
+ 10 | Hulda Will III       | ella_sanford@stracke.com         | 3746 Ashton Divide  | Mikeberg         | Florida    | 22826
+(10 rows)
+
+exercisedb=# select * from customers name email;
+ERROR:  syntax error at or near "email"
+LINE 1: select * from customers name email;
+                                     ^
+exercisedb=# select * from customers order by name, email;
+ id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+ 10 | Hulda Will III       | ella_sanford@stracke.com         | 3746 Ashton Divide  | Mikeberg         | Florida    | 22826
+  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+  2 | Tyrell Von DDS       | cleo_frami@bartondenesik.name    | 63337 Abdullah Camp | Verdieborough    | Colorado   | 69882-7027
+  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Maine      | 55164-9178
+  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+(10 rows)
+
+exercisedb=# select * from customers order by *,*, address, city
+exercisedb-# ;
+ERROR:  syntax error at or near "*"
+LINE 1: select * from customers order by *,*, address, city
+                                         ^
+exercisedb=# select name, email from customers
+exercisedb-# ;
+         name         |              email
+----------------------+----------------------------------
+ Donato Rempel        | ladarius@waelchi.org
+ Tyrell Von DDS       | cleo_frami@bartondenesik.name
+ Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name
+ Evert Pfeffer        | alisa.luettgen@hoeger.org
+ Elta Dicki           | lesly@heaney.org
+ Zelma Davis          | osborne@mohr.biz
+ Edna Hintz           | elisha_mclaughlin@pouros.biz
+ Coleman Prohaska Jr. | taryn.becker@doyle.org
+ Wilhelmine Huels     | alexander_rice@ornjakubowski.com
+ Hulda Will III       | ella_sanford@stracke.com
+(10 rows)
+
+exercisedb=# select id, name, address from customers;
+ id |         name         |       address
+----+----------------------+---------------------
+  1 | Donato Rempel        | 890 Ullrich Plains
+  2 | Tyrell Von DDS       | 63337 Abdullah Camp
+  3 | Ms. Sofia Rowe       | 1991 Kyler Village
+  4 | Evert Pfeffer        | 1311 Khalil Shores
+  5 | Elta Dicki           | 3878 Alyce Lock
+  6 | Zelma Davis          | 184 Hazel Lane
+  7 | Edna Hintz           | 2550 Hassan Pass
+  8 | Coleman Prohaska Jr. | 32202 Zemlak Ridge
+  9 | Wilhelmine Huels     | 44097 Elvie Divide
+ 10 | Hulda Will III       | 3746 Ashton Divide
+(10 rows)
+
+exercisedb=# select count name from customers;
+ERROR:  syntax error at or near "name"
+LINE 1: select count name from customers;
+                     ^
+exercisedb=# select count(name) from customers;
+ count
+-------
+    10
+(1 row)
+
+exercisedb=# \db
+        List of tablespaces
+    Name    |   Owner    | Location
+------------+------------+----------
+ pg_default | lukebartel |
+ pg_global  | lukebartel |
+(2 rows)
+
+exercisedb=# \dt
+           List of relations
+ Schema |    Name    | Type  |  Owner
+--------+------------+-------+---------
+ public | customers  | table | gschool
+ public | items      | table | gschool
+ public | orderitems | table | gschool
+ public | orders     | table | gschool
+(4 rows)
+
+exercisedb=# select * orders
+exercisedb-# ;
+ERROR:  syntax error at or near "orders"
+LINE 1: select * orders
+                 ^
+exercisedb=# select * orders;
+ERROR:  syntax error at or near "orders"
+LINE 1: select * orders;
+                 ^
+exercisedb=# select * from orders;
+ id | customer_id | amount
+----+-------------+--------
+  1 |           6 |  63.35
+  2 |           5 |  55.42
+  3 |           7 |   91.7
+  4 |           4 |  49.52
+  5 |           4 |   4.81
+  6 |           5 |  65.82
+  7 |           4 |  25.91
+  8 |           8 |  64.59
+  9 |           3 |  68.89
+ 10 |           7 |  85.04
+ 11 |           1 |  19.67
+ 12 |           6 |  29.74
+ 13 |           5 |  61.56
+ 14 |           6 |  30.24
+ 15 |           1 |   5.67
+ 16 |           9 |  31.45
+ 17 |           2 |   1.69
+ 18 |          10 |  30.91
+ 19 |           3 |  97.11
+ 20 |           2 |    5.4
+ 21 |           1 |  55.97
+ 22 |           4 |  44.42
+ 23 |          10 |  80.77
+ 24 |           7 |  11.16
+ 25 |          10 |  26.37
+ 26 |           1 |  39.48
+ 27 |           9 |  13.33
+ 28 |           4 |  19.72
+ 29 |           6 |  73.06
+ 30 |          10 |  81.17
+ 31 |          10 |  56.66
+ 32 |           4 |  84.81
+ 33 |           6 |  36.94
+exercisedb=# select sum amount from orders
+exercisedb-# ;
+ERROR:  column "sum" does not exist
+LINE 1: select sum amount from orders
+               ^
+exercisedb=# select sum(amount) from orders;
+   sum
+---------
+ 2466.41
+(1 row)
+
+exercisedb=# select sum(amount) from orders where customer_id = 1;
+  sum
+--------
+ 156.07
+(1 row)
+
+exercisedb=# select avg(amount) from orders;
+         avg
+---------------------
+ 49.3282000000000000
+(1 row)
+
+exercisedb=# select avg(amount) from orders round(2);
+ERROR:  syntax error at or near "2"
+LINE 1: select avg(amount) from orders round(2);
+                                             ^
+exercisedb=# select round(avg(amount),2) from orders;
+ round
+-------
+ 49.33
+(1 row)
+
+exercisedb=# select min(amount) from orders;
+ min
+------
+ 1.69
+(1 row)
+
+exercisedb=# select max(amount) from orders;
+ max
+------
+ 99.0
+(1 row)
+
+exercisedb=# SELECT NAME, SUM(SALARY) FROM CUSTOMERS
+exercisedb-#      GROUP BY NAME;
+ERROR:  column "salary" does not exist
+LINE 1: SELECT NAME, SUM(SALARY) FROM CUSTOMERS
+                         ^
+exercisedb=# select name, min(amount) group by name;
+ERROR:  column "name" does not exist
+LINE 1: select name, min(amount) group by name;
+               ^
+exercisedb=# select id, min(amount) group by id;
+ERROR:  column "id" does not exist
+LINE 1: select id, min(amount) group by id;
+               ^
+exercisedb=# select * from orders, min(amount) group by id;
+ERROR:  aggregate functions are not allowed in functions in FROM
+LINE 1: select * from orders, min(amount) group by id;
+                              ^
+exercisedb=# select id, min(amount) from orders group by id;
+ id |  min
+----+-------
+ 25 | 26.37
+ 26 | 39.48
+ 17 |  1.69
+ 33 | 36.94
+ 10 | 85.04
+ 47 | 31.07
+ 15 |  5.67
+ 21 | 55.97
+ 32 | 84.81
+ 24 | 11.16
+  8 | 64.59
+ 28 | 19.72
+ 30 | 81.17
+  6 | 65.82
+ 29 | 73.06
+ 41 | 35.28
+ 36 | 81.47
+ 23 | 80.77
+ 44 |  99.0
+ 43 | 37.08
+ 35 | 94.27
+  7 | 25.91
+ 20 |   5.4
+ 27 | 13.33
+ 11 | 19.67
+ 39 | 52.57
+ 31 | 56.66
+ 34 | 35.54
+ 12 | 29.74
+ 18 | 30.91
+  2 | 55.42
+ 46 |  3.05
+ 40 | 34.62
+exercisedb=#
+exercisedb=# select id, max(amount) from orders group by id;
+ id |  max
+----+-------
+ 25 | 26.37
+ 26 | 39.48
+ 17 |  1.69
+ 33 | 36.94
+ 10 | 85.04
+ 47 | 31.07
+ 15 |  5.67
+ 21 | 55.97
+ 32 | 84.81
+ 24 | 11.16
+  8 | 64.59
+ 28 | 19.72
+ 30 | 81.17
+  6 | 65.82
+ 29 | 73.06
+ 41 | 35.28
+ 36 | 81.47
+ 23 | 80.77
+ 44 |  99.0
+ 43 | 37.08
+ 35 | 94.27
+  7 | 25.91
+ 20 |   5.4
+ 27 | 13.33
+ 11 | 19.67
+ 39 | 52.57
+ 31 | 56.66
+ 34 | 35.54
+ 12 | 29.74
+ 18 | 30.91
+  2 | 55.42
+ 46 |  3.05
+ 40 | 34.62
+ 13 | 61.56
+  5 |  4.81
+ 19 | 97.11
+ 37 | 86.86
+ 38 | 58.23
+ 48 | 80.36
+ 50 |  59.5
+ 42 | 77.16
+ 16 | 31.45
+  4 | 49.52
+  1 | 63.35
+ 49 |  50.1
+ 22 | 44.42
+ 45 |  37.9
+  3 |  91.7
+ 14 | 30.24
+  9 | 68.89
+(50 rows)
+
+exercisedb=#
+exercisedb=#
+exercisedb=#
+exercisedb=#
+exercisedb=# select customer_id, max(amount) from orders group by customer_id;
+ customer_id |  max
+-------------+-------
+           8 |  99.0
+           4 | 84.81
+           1 | 55.97
+           5 | 81.47
+           3 | 97.11
+          10 | 81.17
+           9 | 31.45
+           6 | 73.06
+           2 |   5.4
+           7 |  91.7
+(10 rows)
+
+exercisedb=# select customer_id, min(amount) from orders group by customer_id;
+ customer_id |  min
+-------------+-------
+           8 | 31.07
+           4 |  4.81
+           1 |  5.67
+           5 | 52.57
+           3 |  50.1
+          10 |  3.05
+           9 | 13.33
+           6 | 29.74
+           2 |  1.69
+           7 | 11.16
+(10 rows)
+
+exercisedb=# select * customers where state = 'Colorado'
+exercisedb-# ;
+ERROR:  syntax error at or near "customers"
+LINE 1: select * customers where state = 'Colorado'
+                 ^
+exercisedb=# select * from customers where state = 'Colorado'
+exercisedb-# ;
+ id |         name         |             email             |       address       |     city      |  state   |  zipcode
+----+----------------------+-------------------------------+---------------------+---------------+----------+------------
+  2 | Tyrell Von DDS       | cleo_frami@bartondenesik.name | 63337 Abdullah Camp | Verdieborough | Colorado | 69882-7027
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org        | 32202 Zemlak Ridge  | Rigobertoside | Colorado | 95667-8653
+(2 rows)
+
+exercisedb=# select * from customers where state = 'Colorado' and city = 'Rigobertoside'                                               ;
+ id |         name         |         email          |      address       |     city      |  state   |  zipcode
+----+----------------------+------------------------+--------------------+---------------+----------+------------
+  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org | 32202 Zemlak Ridge | Rigobertoside | Colorado | 95667-8653
+(1 row)
+
+exercisedb=# select * from customers where state = 'Ohio' or state = 'Virginia';
+ id |      name      |             email             |      address       |      city      |  state   |  zipcode
+----+----------------+-------------------------------+--------------------+----------------+----------+------------
+  1 | Donato Rempel  | ladarius@waelchi.org          | 890 Ullrich Plains | Janachester    | Virginia | 77714
+  3 | Ms. Sofia Rowe | jacky_funk@bayerprosacco.name | 1991 Kyler Village | Opheliaborough | Ohio     | 15599-5395
+  6 | Zelma Davis    | osborne@mohr.biz              | 184 Hazel Lane     | Alport         | Ohio     | 87119
+(3 rows)
+
+exercisedb=# select * from orders
+exercisedb-# ;
+ id | customer_id | amount
+----+-------------+--------
+  1 |           6 |  63.35
+  2 |           5 |  55.42
+  3 |           7 |   91.7
+  4 |           4 |  49.52
+  5 |           4 |   4.81
+  6 |           5 |  65.82
+  7 |           4 |  25.91
+  8 |           8 |  64.59
+  9 |           3 |  68.89
+ 10 |           7 |  85.04
+ 11 |           1 |  19.67
+ 12 |           6 |  29.74
+ 13 |           5 |  61.56
+ 14 |           6 |  30.24
+ 15 |           1 |   5.67
+ 16 |           9 |  31.45
+ 17 |           2 |   1.69
+ 18 |          10 |  30.91
+ 19 |           3 |  97.11
+ 20 |           2 |    5.4
+ 21 |           1 |  55.97
+ 22 |           4 |  44.42
+ 23 |          10 |  80.77
+ 24 |           7 |  11.16
+ 25 |          10 |  26.37
+ 26 |           1 |  39.48
+ 27 |           9 |  13.33
+ 28 |           4 |  19.72
+ 29 |           6 |  73.06
+ 30 |          10 |  81.17
+ 31 |          10 |  56.66
+ 32 |           4 |  84.81
+ 33 |           6 |  36.94
+exercisedb=# select * from items
+exercisedb-# ;
+ id |  name  |    description
+----+--------+-------------------
+  1 | ski01  | downhill ski
+  2 | ski02  | cross country ski
+  3 | ski03  | snow board
+  4 | bike01 | mountain bike
+  5 | bike02 | road bike
+  6 | bike03 | tricycle
+  7 | boot01 | hiking boots
+  8 | boot02 | ski boots
+  9 | boot03 | moon boots
+(9 rows)
+
+exercisedb=# update orders set description='board01' where id = 3;
+ERROR:  column "description" of relation "orders" does not exist
+LINE 1: update orders set description='board01' where id = 3;
+                          ^
+exercisedb=# update items set description='board01' where id = 3;
+UPDATE 1
+exercisedb=# select * from items
+exercisedb-# ;
+ id |  name  |    description
+----+--------+-------------------
+  1 | ski01  | downhill ski
+  2 | ski02  | cross country ski
+  4 | bike01 | mountain bike
+  5 | bike02 | road bike
+  6 | bike03 | tricycle
+  7 | boot01 | hiking boots
+  8 | boot02 | ski boots
+  9 | boot03 | moon boots
+  3 | ski03  | board01
+(9 rows)
+
+exercisedb=# insert into items(name, description) values(kayak01, one person river kayak)
+exercisedb-# ;
+ERROR:  syntax error at or near "person"
+LINE 1: ...into items(name, description) values(kayak01, one person riv...
+                                                             ^
+exercisedb=# insert into items(name, description) values(kayak01, 'one person river kayak')                                            ;
+ERROR:  column "kayak01" does not exist
+LINE 1: insert into items(name, description) values(kayak01, 'one pe...
+                                                    ^
+exercisedb=# select * from items
+exercisedb-# ;
+ id |  name  |    description
+----+--------+-------------------
+  1 | ski01  | downhill ski
+  2 | ski02  | cross country ski
+  4 | bike01 | mountain bike
+  5 | bike02 | road bike
+  6 | bike03 | tricycle
+  7 | boot01 | hiking boots
+  8 | boot02 | ski boots
+  9 | boot03 | moon boots
+  3 | ski03  | board01
+(9 rows)
+
+exercisedb=# insert into items(name, description) values('kayak01', 'one person river kayak')                                          ;
+INSERT 0 1
+exercisedb=# select * from items
+exercisedb-# ;
+ id |  name   |      description
+----+---------+------------------------
+  1 | ski01   | downhill ski
+  2 | ski02   | cross country ski
+  4 | bike01  | mountain bike
+  5 | bike02  | road bike
+  6 | bike03  | tricycle
+  7 | boot01  | hiking boots
+  8 | boot02  | ski boots
+  9 | boot03  | moon boots
+  3 | ski03   | board01
+ 10 | kayak01 | one person river kayak
+(10 rows)
+
+exercisedb=# delete from items where name = kayak01;
+ERROR:  column "kayak01" does not exist
+LINE 1: delete from items where name = kayak01;
+                                       ^
+exercisedb=# select * from items                                                                                                       ;
+ id |  name   |      description
+----+---------+------------------------
+  1 | ski01   | downhill ski
+  2 | ski02   | cross country ski
+  4 | bike01  | mountain bike
+  5 | bike02  | road bike
+  6 | bike03  | tricycle
+  7 | boot01  | hiking boots
+  8 | boot02  | ski boots
+  9 | boot03  | moon boots
+  3 | ski03   | board01
+ 10 | kayak01 | one person river kayak
+(10 rows)
+
+exercisedb=# select customer_id, sum(amount) from orders group by customer_id;
+ customer_id |  sum
+-------------+--------
+           8 | 231.74
+           4 | 287.42
+           1 | 156.07
+           5 | 376.34
+           3 | 387.53
+          10 | 313.55
+           9 |  44.78
+           6 | 268.87
+           2 |   7.09
+           7 | 393.02
+(10 rows)
+
+exercisedb=# select customer_id, sum(amount) from orders group by customer_id order by customer_id;
+ customer_id |  sum
+-------------+--------
+           1 | 156.07
+           2 |   7.09
+           3 | 387.53
+           4 | 287.42
+           5 | 376.34
+           6 | 268.87
+           7 | 393.02
+           8 | 231.74
+           9 |  44.78
+          10 | 313.55
+(10 rows)
+
+exercisedb=# select * from orders
+exercisedb-# ;
+ id | customer_id | amount
+----+-------------+--------
+  1 |           6 |  63.35
+  2 |           5 |  55.42
+  3 |           7 |   91.7
+  4 |           4 |  49.52
+  5 |           4 |   4.81
+  6 |           5 |  65.82
+  7 |           4 |  25.91
+  8 |           8 |  64.59
+  9 |           3 |  68.89
+ 10 |           7 |  85.04
+ 11 |           1 |  19.67
+ 12 |           6 |  29.74
+ 13 |           5 |  61.56
+ 14 |           6 |  30.24
+ 15 |           1 |   5.67
+ 16 |           9 |  31.45
+ 17 |           2 |   1.69
+ 18 |          10 |  30.91
+ 19 |           3 |  97.11
+ 20 |           2 |    5.4
+ 21 |           1 |  55.97
+ 22 |           4 |  44.42
+ 23 |          10 |  80.77
+ 24 |           7 |  11.16
+ 25 |          10 |  26.37
+ 26 |           1 |  39.48
+ 27 |           9 |  13.33
+ 28 |           4 |  19.72
+ 29 |           6 |  73.06
+ 30 |          10 |  81.17
+ 31 |          10 |  56.66
+ 32 |           4 |  84.81
+ 33 |           6 |  36.94
+exercisedb=# select * from orders join inventory on orders.customer_id = customers.id;
+ERROR:  relation "inventory" does not exist
+LINE 1: select * from orders join inventory on orders.customer_id = ...
+                                  ^
+exercisedb=# select * from orders join customers on orders.customer_id = customers.id;
+ id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+ 11 |           1 |  19.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 12 |           6 |  29.74 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+ 13 |           5 |  61.56 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+ 14 |           6 |  30.24 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+ 15 |           1 |   5.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 16 |           9 |  31.45 |  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Ma: id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+ 11 |           1 |  19.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 12 |           6 |  29.74 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+ 13 |           5 |  61.56 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+ 14 |           6 |  30.24 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+ 15 |           1 |   5.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 16 |           9 |  31.45 |  9 | Wilhelmine Huels     | alexander_rice@ornjakubowski.com | 44097 Elvie Divide  | West Lauryntown  | Mai: id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | Cal: id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | Calif: id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | Califor: id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | Californi: id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California : id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | : id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40: id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 4090: id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+ 11 |           1 |  19.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 12 |           6 |  29.74 |  6 | Zelma Davis          | osborne@mohr.biz   : id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+ 11 |           1 |  19.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 12 |           6 |  29.74 |  6 | Zelma Davis          | osborne@mohr.biz    : id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+ 11 |           1 |  19.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 12 |           6 |  29.74 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+ 13 |           5 |  61.56 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+ 14 |           6 |  30.24 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+ 15 |           1 |   5.67 |  1 | Donato Rempel        | ladarius@waelchi.org : id | customer_id | amount | id |         name         |              email               |       address       |       city       |   state    |  zipcode
+----+-------------+--------+----+----------------------+----------------------------------+---------------------+------------------+------------+------------
+  1 |           6 |  63.35 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+  2 |           5 |  55.42 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  3 |           7 |   91.7 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+  4 |           4 |  49.52 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  5 |           4 |   4.81 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  6 |           5 |  65.82 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+  7 |           4 |  25.91 |  4 | Evert Pfeffer        | alisa.luettgen@hoeger.org        | 1311 Khalil Shores  | Port Ozella      | Arizona    | 34713
+  8 |           8 |  64.59 |  8 | Coleman Prohaska Jr. | taryn.becker@doyle.org           | 32202 Zemlak Ridge  | Rigobertoside    | Colorado   | 95667-8653
+  9 |           3 |  68.89 |  3 | Ms. Sofia Rowe       | jacky_funk@bayerprosacco.name    | 1991 Kyler Village  | Opheliaborough   | Ohio       | 15599-5395
+ 10 |           7 |  85.04 |  7 | Edna Hintz           | elisha_mclaughlin@pouros.biz     | 2550 Hassan Pass    | North Kelliestad | California | 40909-5637
+ 11 |           1 |  19.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 12 |           6 |  29.74 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+ 13 |           5 |  61.56 |  5 | Elta Dicki           | lesly@heaney.org                 | 3878 Alyce Lock     | Deckowtown       | Montana    | 42114-6195
+ 14 |           6 |  30.24 |  6 | Zelma Davis          | osborne@mohr.biz                 | 184 Hazel Lane      | Alport           | Ohio       | 87119
+ 15 |           1 |   5.67 |  1 | Donato Rempel        | ladarius@waelchi.org             | 890 Ullrich Plains  | Janachester      | Virginia   | 77714
+ 16 |           9 |  31.45 |  9 | Wilhelmine Huels     | alexander_rice@ornjakuexercisedb=# select customers.id, orders.customer_id
+exercisedb-# from customers
+exercisedb-# join orders
+exercisedb-# on customers.id = orders.customer_id
+exercisedb-# order by customers.name;
+ id | customer_id
+----+-------------
+  8 |           8
+  8 |           8
+  8 |           8
+  8 |           8
+  1 |           1
+  1 |           1
+  1 |           1
+  1 |           1
+  1 |           1
+  7 |           7
+  7 |           7
+  7 |           7
+  7 |           7
+  7 |           7
+  7 |           7
+  5 |           5
+  5 |           5
+  5 |           5
+  5 |           5
+  5 |           5
+  5 |           5
+  4 |           4
+  4 |           4
+  4 |           4
+  4 |           4
+  4 |           4
+  4 |           4
+  4 |           4
+ 10 |          10
+ 10 |          10
+ 10 |          10
+ 10 |          10
+ 10 |          10
+exercisedb=#
+exercisedb=# select customers.id, customers.name, sum(orders.amount)           from customers                                                                 join orders                                                                    on customers.id = orders.customer_id                                           order by customers.name;
+ERROR:  column "customers.id" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select customers.id, customers.name, sum(orders.amount)
+               ^
+exercisedb=# group by customers.id, customers.name, sum(orders.amount)         from customers                                                                 join orders                                                                    on customers.id = orders.customer_id                                           order by customers.name;
+ERROR:  syntax error at or near "group"
+LINE 1: group by customers.id, customers.name, sum(orders.amount)
+        ^
+exercisedb=#
+  [Restored]
+Last login: Mon Jul  7 22:20:43 on console
+
+|ruby-2.1.1| Lukes-MacBook-Air-2 in ~
+○ → cd gSchoolWork/
+
+|ruby-2.1.1| Lukes-MacBook-Air-2 in ~/gSchoolWork
+○ → cd sql-query-exercise/
+
+|ruby-2.1.1| Lukes-MacBook-Air-2 in ~/gSchoolWork/sql-query-exercise
+± |master ✓| → mine .
+
+|ruby-2.1.1| Lukes-MacBook-Air-2 in ~/gSchoolWork/sql-query-exercise
+± |master ✓| → psql -d exercisedb -a -f restore.sql -U gschool
+--
+-- NOTE:
+--
+-- File paths need to be edited. Search for $$PATH$$ and
+-- replace it with the path to the directory containing
+-- the extracted data files.
+--
+--
+-- PostgreSQL database dump
+--
+SET statement_timeout = 0;
+SET
+SET lock_timeout = 0;
+SET
+SET client_encoding = 'UTF8';
+SET
+SET standard_conforming_strings = on;
+SET
+SET check_function_bodies = false;
+SET
+SET client_min_messages = warning;
+SET
+SET search_path = public, pg_catalog;
+SET
+ALTER TABLE ONLY public.orders DROP CONSTRAINT orders_pkey;
+ALTER TABLE
+ALTER TABLE ONLY public.orderitems DROP CONSTRAINT orderitems_pkey;
+ALTER TABLE
+ALTER TABLE ONLY public.items DROP CONSTRAINT items_pkey;
+ALTER TABLE
+ALTER TABLE ONLY public.customers DROP CONSTRAINT customers_pkey;
+ALTER TABLE
+ALTER TABLE public.orders ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE
+ALTER TABLE public.orderitems ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE
+ALTER TABLE public.items ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE
+ALTER TABLE public.customers ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE
+DROP SEQUENCE public.orders_id_seq;
+DROP SEQUENCE
+DROP TABLE public.orders;
+DROP TABLE
+DROP SEQUENCE public.orderitems_id_seq;
+DROP SEQUENCE
+DROP TABLE public.orderitems;
+DROP TABLE
+DROP SEQUENCE public.items_id_seq;
+DROP SEQUENCE
+DROP TABLE public.items;
+DROP TABLE
+DROP SEQUENCE public.customers_id_seq;
+DROP SEQUENCE
+DROP TABLE public.customers;
+DROP TABLE
+DROP EXTENSION plpgsql;
+DROP EXTENSION
+DROP SCHEMA public;
+DROP SCHEMA
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: gschool
+--
+CREATE SCHEMA public;
+CREATE SCHEMA
+ALTER SCHEMA public OWNER TO gschool;
+ALTER SCHEMA
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: gschool
+--
+COMMENT ON SCHEMA public IS 'standard public schema';
+COMMENT
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+--
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+CREATE EXTENSION
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+--
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+COMMENT
+SET search_path = public, pg_catalog;
+SET
+SET default_tablespace = '';
+SET
+SET default_with_oids = false;
+SET
+--
+-- Name: customers; Type: TABLE; Schema: public; Owner: gschool; Tablespace:
+--
+CREATE TABLE customers (
+    id integer NOT NULL,
+    name text,
+    email text,
+    address text,
+    city text,
+    state text,
+    zipcode text
+);
+CREATE TABLE
+ALTER TABLE public.customers OWNER TO gschool;
+ALTER TABLE
+--
+-- Name: customers_id_seq; Type: SEQUENCE; Schema: public; Owner: gschool
+--
+CREATE SEQUENCE customers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+CREATE SEQUENCE
+ALTER TABLE public.customers_id_seq OWNER TO gschool;
+ALTER TABLE
+--
+-- Name: customers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gschool
+--
+ALTER SEQUENCE customers_id_seq OWNED BY customers.id;
+ALTER SEQUENCE
+--
+-- Name: items; Type: TABLE; Schema: public; Owner: gschool; Tablespace:
+--
+CREATE TABLE items (
+    id integer NOT NULL,
+    name text,
+    description text
+);
+CREATE TABLE
+ALTER TABLE public.items OWNER TO gschool;
+ALTER TABLE
+--
+-- Name: items_id_seq; Type: SEQUENCE; Schema: public; Owner: gschool
+--
+CREATE SEQUENCE items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+CREATE SEQUENCE
+ALTER TABLE public.items_id_seq OWNER TO gschool;
+ALTER TABLE
+--
+-- Name: items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gschool
+--
+ALTER SEQUENCE items_id_seq OWNED BY items.id;
+ALTER SEQUENCE
+--
+-- Name: orderitems; Type: TABLE; Schema: public; Owner: gschool; Tablespace:
+--
+CREATE TABLE orderitems (
+    id integer NOT NULL,
+    order_id integer,
+    item_id integer
+);
+CREATE TABLE
+ALTER TABLE public.orderitems OWNER TO gschool;
+ALTER TABLE
+--
+-- Name: orderitems_id_seq; Type: SEQUENCE; Schema: public; Owner: gschool
+--
+CREATE SEQUENCE orderitems_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+CREATE SEQUENCE
+ALTER TABLE public.orderitems_id_seq OWNER TO gschool;
+ALTER TABLE
+--
+-- Name: orderitems_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gschool
+--
+ALTER SEQUENCE orderitems_id_seq OWNED BY orderitems.id;
+ALTER SEQUENCE
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: gschool; Tablespace:
+--
+CREATE TABLE orders (
+    id integer NOT NULL,
+    customer_id integer,
+    amount numeric
+);
+CREATE TABLE
+ALTER TABLE public.orders OWNER TO gschool;
+ALTER TABLE
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: gschool
+--
+CREATE SEQUENCE orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+CREATE SEQUENCE
+ALTER TABLE public.orders_id_seq OWNER TO gschool;
+ALTER TABLE
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: gschool
+--
+ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+ALTER SEQUENCE
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: gschool
+--
+ALTER TABLE ONLY customers ALTER COLUMN id SET DEFAULT nextval('customers_id_seq'::regclass);
+ALTER TABLE
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: gschool
+--
+ALTER TABLE ONLY items ALTER COLUMN id SET DEFAULT nextval('items_id_seq'::regclass);
+ALTER TABLE
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: gschool
+--
+ALTER TABLE ONLY orderitems ALTER COLUMN id SET DEFAULT nextval('orderitems_id_seq'::regclass);
+ALTER TABLE
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: gschool
+--
+ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
+ALTER TABLE
+--
+-- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: gschool
+--
+COPY customers (id, name, email, address, city, state, zipcode) FROM stdin;
+COPY customers (id, name, email, address, city, state, zipcode) FROM '$$PATH$$/2232.dat';
+psql:restore.sql:249: ERROR:  could not open file "$$PATH$$/2232.dat" for reading: No such file or directory
+--
+-- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gschool
+--
+--
+-- Data for Name: items; Type: TABLE DATA; Schema: public; Owner: gschool
+--
+COPY items (id, name, description) FROM stdin;
+COPY items (id, name, description) FROM '$$PATH$$/2236.dat';
+psql:restore.sql:262: ERROR:  could not open file "$$PATH$$/2236.dat" for reading: No such file or directory
+--
+-- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gschool
+--
+--
+-- Data for Name: orderitems; Type: TABLE DATA; Schema: public; Owner: gschool
+--
+COPY orderitems (id, order_id, item_id) FROM stdin;
+COPY orderitems (id, order_id, item_id) FROM '$$PATH$$/2234.dat';
+psql:restore.sql:275: ERROR:  could not open file "$$PATH$$/2234.dat" for reading: No such file or directory
+--
+-- Name: orderitems_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gschool
+--
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: gschool
+--
+COPY orders (id, customer_id, amount) FROM stdin;
+COPY orders (id, customer_id, amount) FROM '$$PATH$$/2230.dat';
+psql:restore.sql:288: ERROR:  could not open file "$$PATH$$/2230.dat" for reading: No such file or directory
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: gschool
+--
+--
+-- Name: customers_pkey; Type: CONSTRAINT; Schema: public; Owner: gschool; Tablespace:
+--
+ALTER TABLE ONLY customers
+    ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
+ALTER TABLE
+--
+-- Name: items_pkey; Type: CONSTRAINT; Schema: public; Owner: gschool; Tablespace:
+--
+ALTER TABLE ONLY items
+    ADD CONSTRAINT items_pkey PRIMARY KEY (id);
+ALTER TABLE
+--
+-- Name: orderitems_pkey; Type: CONSTRAINT; Schema: public; Owner: gschool; Tablespace:
+--
+ALTER TABLE ONLY orderitems
+    ADD CONSTRAINT orderitems_pkey PRIMARY KEY (id);
+ALTER TABLE
+--
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: gschool; Tablespace:
+--
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+ALTER TABLE
+--
+-- Name: public; Type: ACL; Schema: -; Owner: gschool
+--
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE
+REVOKE ALL ON SCHEMA public FROM gschool;
+REVOKE
+GRANT ALL ON SCHEMA public TO gschool;
+GRANT
+GRANT ALL ON SCHEMA public TO PUBLIC;
+GRANT
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Donato Rempel','ladarius@waelchi.org','890 Ullrich Plains', 'Janachester', 'Virginia', '77714');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Tyrell Von DDS','cleo_frami@bartondenesik.name','63337 Abdullah Camp', 'Verdieborough', 'Colorado', '69882-7027');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Ms. Sofia Rowe','jacky_funk@bayerprosacco.name','1991 Kyler Village', 'Opheliaborough', 'Ohio', '15599-5395');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Evert Pfeffer','alisa.luettgen@hoeger.org','1311 Khalil Shores', 'Port Ozella', 'Arizona', '34713');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Elta Dicki','lesly@heaney.org','3878 Alyce Lock', 'Deckowtown', 'Montana', '42114-6195');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Zelma Davis','osborne@mohr.biz','184 Hazel Lane', 'Alport', 'Ohio', '87119');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Edna Hintz','elisha_mclaughlin@pouros.biz','2550 Hassan Pass', 'North Kelliestad', 'California', '40909-5637');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Coleman Prohaska Jr.','taryn.becker@doyle.org','32202 Zemlak Ridge', 'Rigobertoside', 'Colorado', '95667-8653');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Wilhelmine Huels','alexander_rice@ornjakubowski.com','44097 Elvie Divide', 'West Lauryntown', 'Maine', '55164-9178');
+INSERT 0 1
+INSERT INTO customers (name, email, address, city, state, zipcode) VALUES ('Hulda Will III','ella_sanford@stracke.com','3746 Ashton Divide', 'Mikeberg', 'Florida', '22826');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('ski01', 'downhill ski');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('ski02', 'cross country ski');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('ski03', 'snow board');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('bike01', 'mountain bike');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('bike02', 'road bike');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('bike03', 'tricycle');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('boot01', 'hiking boots');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('boot02', 'ski boots');
+INSERT 0 1
+INSERT INTO items (name, description) VALUES ('boot03', 'moon boots');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('1', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('1', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('1', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('2', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('2', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('2', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('2', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('3', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('3', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('3', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('4', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('4', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('4', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('4', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('5', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('5', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('5', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('5', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('6', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('6', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('6', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('6', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('7', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('7', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('7', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('7', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('8', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('8', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('8', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('8', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('9', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('9', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('9', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('9', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('10', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('10', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('11', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('11', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('11', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('12', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('12', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('12', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('13', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('13', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('13', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('13', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('14', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('14', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('14', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('15', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('15', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('16', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('16', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('16', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('17', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('17', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('17', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('17', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('18', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('18', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('18', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('19', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('19', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('19', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('19', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('20', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('20', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('20', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('20', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('21', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('21', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('21', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('21', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('22', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('22', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('22', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('23', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('23', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('24', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('24', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('24', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('25', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('25', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('25', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('25', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('26', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('26', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('26', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('26', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('27', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('27', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('27', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('27', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('28', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('28', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('29', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('29', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('29', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('30', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('30', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('30', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('31', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('31', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('31', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('31', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('32', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('32', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('32', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('32', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('33', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('33', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('33', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('34', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('34', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('34', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('34', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('35', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('35', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('35', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('35', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('36', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('36', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('36', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('37', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('37', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('37', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('38', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('38', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('38', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('38', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('39', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('39', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('39', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('40', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('40', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('40', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('41', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('41', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('41', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('42', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('42', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('42', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('42', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('43', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('43', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('43', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('44', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('44', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('44', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('44', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('45', '5');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('45', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('45', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('46', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('46', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('47', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('47', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('47', '4');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('48', '7');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('48', '2');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('48', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('48', '3');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('49', '9');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('49', '1');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('49', '6');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('50', '8');
+INSERT 0 1
+INSERT INTO orderitems (order_id, item_id) VALUES ('50', '2');
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (6, 63.35);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (5, 55.42);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (7, 91.7);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (4, 49.52);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (4, 4.81);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (5, 65.82);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (4, 25.91);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (8, 64.59);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (3, 68.89);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (7, 85.04);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (1, 19.67);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (6, 29.74);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (5, 61.56);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (6, 30.24);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (1, 5.67);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (9, 31.45);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (2, 1.69);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (10, 30.91);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (3, 97.11);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (2, 5.4);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (1, 55.97);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (4, 44.42);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (10, 80.77);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (7, 11.16);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (10, 26.37);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (1, 39.48);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (9, 13.33);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (4, 19.72);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (6, 73.06);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (10, 81.17);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (10, 56.66);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (4, 84.81);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (6, 36.94);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (6, 35.54);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (3, 94.27);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (5, 81.47);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (7, 86.86);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (4, 58.23);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (5, 52.57);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (10, 34.62);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (1, 35.28);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (3, 77.16);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (8, 37.08);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (8, 99.0);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (7, 37.9);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (10, 3.05);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (8, 31.07);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (7, 80.36);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (3, 50.1);
+INSERT 0 1
+INSERT INTO orders (customer_id, amount) VALUES (5, 59.5);
+INSERT 0 1
+--
+-- PostgreSQL database dump complete
+--

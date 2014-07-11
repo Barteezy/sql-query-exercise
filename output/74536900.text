@@ -1,0 +1,7 @@
+exercisedb=# select description from items where description like '%boots';
+ description
+--------------
+ hiking boots
+ ski boots
+ moon boots
+(3 rows)
